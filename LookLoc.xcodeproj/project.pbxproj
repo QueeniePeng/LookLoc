@@ -12,6 +12,7 @@
 		847F6E7E1F51D91F00ECE32C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847F6E7C1F51D91F00ECE32C /* Main.storyboard */; };
 		847F6E801F51D91F00ECE32C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847F6E7F1F51D91F00ECE32C /* Assets.xcassets */; };
 		847F6E831F51D91F00ECE32C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847F6E811F51D91F00ECE32C /* LaunchScreen.storyboard */; };
+		847F6E8B1F51DA8000ECE32C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E8A1F51DA8000ECE32C /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		847F6E7F1F51D91F00ECE32C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		847F6E821F51D91F00ECE32C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		847F6E841F51D91F00ECE32C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		847F6E8A1F51DA8000ECE32C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				847F6E781F51D91F00ECE32C /* AppDelegate.swift */,
 				847F6E7A1F51D91F00ECE32C /* ViewController.swift */,
+				847F6E8A1F51DA8000ECE32C /* Constants.swift */,
 				847F6E7C1F51D91F00ECE32C /* Main.storyboard */,
 				847F6E7F1F51D91F00ECE32C /* Assets.xcassets */,
 				847F6E811F51D91F00ECE32C /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			files = (
 				847F6E7B1F51D91F00ECE32C /* ViewController.swift in Sources */,
 				847F6E791F51D91F00ECE32C /* AppDelegate.swift in Sources */,
+				847F6E8B1F51DA8000ECE32C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
