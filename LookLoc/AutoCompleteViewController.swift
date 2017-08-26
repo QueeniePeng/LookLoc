@@ -8,25 +8,39 @@
 
 import UIKit
 
-class AutoCompleteViewController: UIViewController, UITableViewDelegate {
+class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
+    // UI
     @IBOutlet weak var TFSearch: UITextField!
     @IBOutlet weak var AutoCompleteTableView: UITableView!
     
+    // cell
     fileprivate let reuseIdentifier = "AutoCompleteCell"
     fileprivate var autoCompletes = [AutoComplete]()
+    
+    // text field
+    fileprivate let placeHolder: String = "Search"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // setup cell hight
-        AutoCompleteTableView.rowHeight = self.view.frame.height / 7
+        self.TFSearch.placeholder = placeHolder
+        self.TFSearch.delegate = self
         self.AutoCompleteTableView.delegate = self
         self.AutoCompleteTableView.dataSource = self
-        getAutoComplete()
+        AutoCompleteTableView!.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
+        addNavigation()
+        
+        // self-sizing table view cell
+        AutoCompleteTableView.estimatedRowHeight = 120
+        AutoCompleteTableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    func addNavigation() {
         let nav = self.navigationController?.navigationBar
         self.navigationItem.title = Navigation.Title
         nav?.titleTextAttributes = Navigation.TextAttributes
@@ -37,9 +51,8 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate {
     }
     
     func getAutoComplete() {
+        autoCompletes.removeAll(keepingCapacity: false)
         let locClient = LocationClient()
-        Constants.AutocompleteSearchValues.Input = "volare"
-        Constants.RestaurantSearchValues.keyword = "volare"
         locClient.autoComplete(input: Constants.AutocompleteSearchValues.Input) { (results, error) in
             if let error = error {
                 print("error: \(error)")
@@ -52,8 +65,24 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate {
     }
 }
 
+// MARK: - Text Field
+
 extension AutoCompleteViewController {
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        AutoCompleteTableView!.isHidden = false
+        let substring = (self.TFSearch.text! as NSString).replacingCharacters(in: range, with: string)
+        
+        Constants.AutocompleteSearchValues.Input = substring.lowercased()
+
+        getAutoComplete()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        TFSearch.resignFirstResponder()
+        return true
+    }
 }
 
 
@@ -77,6 +106,13 @@ extension AutoCompleteViewController: UITableViewDataSource {
         cell.LBName.text = autoComplete.name
         cell.LBVincinity.text = autoComplete.vincinity
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell = tableView.cellForRow(at: indexPath) as? AutoCompleteCell
+        TFSearch.text = selectedCell?.LBName.text
+        TFSearch.resignFirstResponder()
+//        self.performSegue(withIdentifier: "", sender: self)
     }
 }
 
