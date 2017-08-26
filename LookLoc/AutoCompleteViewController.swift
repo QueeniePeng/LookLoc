@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoCompleteViewController: UIViewController {
+class AutoCompleteViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var TFSearch: UITextField!
     @IBOutlet weak var AutoCompleteTableView: UITableView!
@@ -18,7 +18,11 @@ class AutoCompleteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // setup cell hight
+        AutoCompleteTableView.rowHeight = self.view.frame.height / 7
+        self.AutoCompleteTableView.delegate = self
+        self.AutoCompleteTableView.dataSource = self
+        getAutoComplete()
     }
     
     func getAutoComplete() {
@@ -32,8 +36,36 @@ class AutoCompleteViewController: UIViewController {
             guard let results = results else { return }
             self.autoCompletes = results
             print("results: \(results.count)")
+            self.AutoCompleteTableView.reloadData()
         }
-        AutoCompleteTableView.reloadData()
+    }
+}
+
+extension AutoCompleteViewController {
+    
+}
+
+
+// MARK: - UITableViewDataSource
+
+extension AutoCompleteViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return autoCompletes.count
+    }
+    
+    // config business cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! AutoCompleteCell
+        let autoComplete = autoCompletes[indexPath.row]
+        cell.LBName.text = autoComplete.name
+        cell.LBVincinity.text = autoComplete.vincinity
+        return cell
     }
 }
 

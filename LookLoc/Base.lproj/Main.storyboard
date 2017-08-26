@@ -31,36 +31,40 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" keyboardType="alphabet" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Zy-nS-CEf" userLabel="AutoComplete Table View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Zy-nS-CEf" userLabel="AutoComplete Table View">
                                 <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AutoCompleteCell" id="75y-3f-7ff" customClass="AutoCompleteCell" customModule="LookLoc" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="75y-3f-7ff" id="QvK-os-DsH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUP-kf-n93">
-                                                    <rect key="frame" x="27" y="8" width="67" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                    <rect key="frame" x="27" y="18" width="321" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="h6H-KB-caS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rq-Cg-dPO">
-                                                    <rect key="frame" x="27" y="37" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rq-Cg-dPO">
+                                                    <rect key="frame" x="27" y="47" width="321" height="29.5"/>
+                                                    <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CUP-kf-n93" firstAttribute="leading" secondItem="QvK-os-DsH" secondAttribute="leadingMargin" constant="19" id="5Bt-se-W3Z"/>
-                                                <constraint firstItem="7rq-Cg-dPO" firstAttribute="leading" secondItem="QvK-os-DsH" secondAttribute="leadingMargin" constant="19" id="N2Q-Cb-buD"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="7rq-Cg-dPO" secondAttribute="bottom" constant="4" id="Sor-US-dXi"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="CUP-kf-n93" secondAttribute="bottom" constant="33" id="d0E-Ec-hxz"/>
-                                                <constraint firstItem="CUP-kf-n93" firstAttribute="top" secondItem="QvK-os-DsH" secondAttribute="topMargin" id="hPw-TN-Dop"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="7rq-Cg-dPO" secondAttribute="bottom" constant="5" id="Sor-US-dXi"/>
+                                                <constraint firstItem="7rq-Cg-dPO" firstAttribute="leading" secondItem="CUP-kf-n93" secondAttribute="leading" id="Tu2-BJ-WQL"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="CUP-kf-n93" secondAttribute="trailing" constant="19" id="fmP-iL-maQ"/>
+                                                <constraint firstItem="CUP-kf-n93" firstAttribute="top" secondItem="QvK-os-DsH" secondAttribute="topMargin" constant="10" id="hPw-TN-Dop"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7rq-Cg-dPO" secondAttribute="trailing" constant="19" id="jvg-Vf-nAu"/>
                                                 <constraint firstItem="7rq-Cg-dPO" firstAttribute="top" secondItem="CUP-kf-n93" secondAttribute="bottom" constant="8" id="wDq-hb-83V"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -70,10 +74,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="B3T-wJ-HsT"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="sm0-ox-Yt3"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
