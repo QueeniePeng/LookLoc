@@ -1,0 +1,6 @@
+framework module Pods_LookLoc {
+  umbrella header "Pods-LookLoc-umbrella.h"
+
+  export *
+  module * { export * }
+}
