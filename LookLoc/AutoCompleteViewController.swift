@@ -25,6 +25,17 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate {
         getAutoComplete()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.title = Navigation.Title
+        nav?.titleTextAttributes = Navigation.TextAttributes
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        // set default is translucent
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
     func getAutoComplete() {
         let locClient = LocationClient()
         Constants.AutocompleteSearchValues.Input = "volare"
