@@ -30,13 +30,14 @@ struct Constants {
     
     // auto complete - values
     struct AutocompleteSearchValues {
-        static let Input: String = "" // get from user
+        static var Input: String = "" // get from user
         static let OffSet: String = "3"
         static let Radius: String = "50000"
         static let Location: String = "41.8781,-87.6298" // chicago lat,lon
     }
     
     struct AutocompleteResponseKeys {
+        static let Predictions: String = "predictions"
         static let Name: String = "main_text"
         static let Vincinity: String = "secondary_text"
         static let StructuredFormat: String = "structured_formatting"
@@ -53,8 +54,8 @@ struct Constants {
     }
     
     struct RestaurantSearchValues {
+        static var keyword: String = "" // get from user
         static let Radius: String = "50000"
-        static let keyword: String = "" // get from user
         static let Language: String = "en"
         static let BusinessType: String = "restaurant"
         static let Location: String = "41.8781,-87.6298" // chicago lat,lon

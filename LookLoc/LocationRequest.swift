@@ -9,26 +9,23 @@
 import Foundation
 
 struct LocationRequest {
-    
-    private let input: String
-    
+        
     // autoComplete example
-    // https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&input=volare&offset=3location=41.8781,-87.6298&radius=50000
+    // https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&input=volare&offset=3&location=41.8781,-87.6298&radius=50000
     
     var autoCompleteURL: Foundation.URL? {
         
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "maps.googleapis.com"
-        urlComponents.path = "maps/api/place/autocomplete/json"
-        urlComponents.query = autocompleteQueryURL(input: input)
-        
-        print(urlComponents.url!)
-        return urlComponents.url
+            var urlComponents = URLComponents()
+            urlComponents.scheme = "https"
+            urlComponents.host = "maps.googleapis.com"
+            urlComponents.path = "/maps/api/place/autocomplete/json"
+            urlComponents.query = autocompleteQueryURL()
+            
+            print(urlComponents.url!)
+            return urlComponents.url
     }
     
     
-    private let keyword: String
     
     // restaurant example
     // https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&location=41.8781,-87.6298&radius=50000&type=restaurant&keyword=volare&language=en
@@ -38,8 +35,8 @@ struct LocationRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "maps.googleapis.com"
-        urlComponents.path = "maps.googleapis.com/maps/api/place/nearbysearch/json"
-        urlComponents.query = restaurantQueryURL(keyword: keyword)
+        urlComponents.path = "/maps.googleapis.com/maps/api/place/nearbysearch/json"
+        urlComponents.query = restaurantQueryURL()
         
         print(urlComponents.url!)
         return urlComponents.url
@@ -51,13 +48,13 @@ struct LocationRequest {
 extension LocationRequest {
     
     // auto complete query
-    func autocompleteQueryURL(input: String) -> String {
+    func autocompleteQueryURL() -> String {
         let methodParameters = [
             Constants.AutocompleteSearchKeys.ApiKey: Constants.ApiKey,
             Constants.AutocompleteSearchKeys.Location: Constants.AutocompleteSearchValues.Location,
             Constants.AutocompleteSearchKeys.Radius: Constants.AutocompleteSearchValues.Radius,
             Constants.AutocompleteSearchKeys.OffSet: Constants.AutocompleteSearchValues.OffSet,
-            Constants.AutocompleteSearchKeys.Input: input
+            Constants.AutocompleteSearchKeys.Input: Constants.AutocompleteSearchValues.Input
             ] as [String: Any]
         
         let autocompleteQuery = escapedParameters(methodParameters as [String: AnyObject])
@@ -65,14 +62,14 @@ extension LocationRequest {
     }
     
     // restaurant query
-    func restaurantQueryURL(keyword: String) -> String {
+    func restaurantQueryURL() -> String {
         let methodParameters = [
             Constants.RestaurantSearchKeys.ApiKey: Constants.ApiKey,
             Constants.RestaurantSearchKeys.BusinessType: Constants.RestaurantSearchValues.BusinessType,
             Constants.RestaurantSearchKeys.Language: Constants.RestaurantSearchValues.Language,
             Constants.RestaurantSearchKeys.Location: Constants.RestaurantSearchValues.Location,
             Constants.RestaurantSearchKeys.Radius: Constants.RestaurantSearchValues.Radius,
-            Constants.RestaurantSearchKeys.keyword: keyword
+            Constants.RestaurantSearchKeys.keyword: Constants.RestaurantSearchValues.keyword
             ] as [String: Any]
         
         let restaurantQuery = escapedParameters(methodParameters as [String: AnyObject])

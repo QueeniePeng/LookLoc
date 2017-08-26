@@ -9,17 +9,23 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    fileprivate var autoCompletes = [AutoComplete]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let locClient = LocationClient()
+        Constants.AutocompleteSearchValues.Input = "volare"
+        Constants.RestaurantSearchValues.keyword = "volare"
+        locClient.autoComplete(input: Constants.AutocompleteSearchValues.Input) { (results, error) in
+            if let error = error {
+                print("error: \(error)")
+            }
+            guard let results = results else { return }
+            self.autoCompletes = results
+            print("results: \(results.count)")
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

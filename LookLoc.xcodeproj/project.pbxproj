@@ -14,6 +14,9 @@
 		847F6E831F51D91F00ECE32C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847F6E811F51D91F00ECE32C /* LaunchScreen.storyboard */; };
 		847F6E8B1F51DA8000ECE32C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E8A1F51DA8000ECE32C /* Constants.swift */; };
 		847F6E8D1F51E4BD00ECE32C /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E8C1F51E4BD00ECE32C /* LocationRequest.swift */; };
+		847F6E8F1F51F5C700ECE32C /* LocationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E8E1F51F5C700ECE32C /* LocationClient.swift */; };
+		847F6E921F51F6FB00ECE32C /* AutoComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E911F51F6FB00ECE32C /* AutoComplete.swift */; };
+		847F6E941F51F98600ECE32C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 847F6E931F51F98600ECE32C /* Podfile */; };
 		A034BFEE6F5758A1E8EA779D /* Pods_LookLoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0511180071FC89CFCB6E10 /* Pods_LookLoc.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,9 @@
 		847F6E841F51D91F00ECE32C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		847F6E8A1F51DA8000ECE32C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		847F6E8C1F51E4BD00ECE32C /* LocationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
+		847F6E8E1F51F5C700ECE32C /* LocationClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationClient.swift; sourceTree = "<group>"; };
+		847F6E911F51F6FB00ECE32C /* AutoComplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoComplete.swift; sourceTree = "<group>"; };
+		847F6E931F51F98600ECE32C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = LookLoc/Podfile; sourceTree = "<group>"; };
 		945186EAAB52DF2BBF77F37D /* Pods-LookLoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookLoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-LookLoc/Pods-LookLoc.release.xcconfig"; sourceTree = "<group>"; };
 		A24F52AF8AF6C31EB8FAF5F3 /* Pods-LookLoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookLoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LookLoc/Pods-LookLoc.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +72,7 @@
 			children = (
 				847F6E771F51D91F00ECE32C /* LookLoc */,
 				847F6E761F51D91F00ECE32C /* Products */,
+				847F6E931F51F98600ECE32C /* Podfile */,
 				44ED3C56850E4AAF16D40C2B /* Pods */,
 				74D386D67A73F3BCF21BAB75 /* Frameworks */,
 			);
@@ -83,15 +90,25 @@
 			isa = PBXGroup;
 			children = (
 				847F6E781F51D91F00ECE32C /* AppDelegate.swift */,
+				847F6E901F51F5CD00ECE32C /* Networking */,
 				847F6E7A1F51D91F00ECE32C /* ViewController.swift */,
-				847F6E8A1F51DA8000ECE32C /* Constants.swift */,
-				847F6E8C1F51E4BD00ECE32C /* LocationRequest.swift */,
 				847F6E7C1F51D91F00ECE32C /* Main.storyboard */,
 				847F6E7F1F51D91F00ECE32C /* Assets.xcassets */,
 				847F6E811F51D91F00ECE32C /* LaunchScreen.storyboard */,
 				847F6E841F51D91F00ECE32C /* Info.plist */,
 			);
 			path = LookLoc;
+			sourceTree = "<group>";
+		};
+		847F6E901F51F5CD00ECE32C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				847F6E8A1F51DA8000ECE32C /* Constants.swift */,
+				847F6E8C1F51E4BD00ECE32C /* LocationRequest.swift */,
+				847F6E8E1F51F5C700ECE32C /* LocationClient.swift */,
+				847F6E911F51F6FB00ECE32C /* AutoComplete.swift */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +176,7 @@
 			files = (
 				847F6E831F51D91F00ECE32C /* LaunchScreen.storyboard in Resources */,
 				847F6E801F51D91F00ECE32C /* Assets.xcassets in Resources */,
+				847F6E941F51F98600ECE32C /* Podfile in Resources */,
 				847F6E7E1F51D91F00ECE32C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,7 +243,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				847F6E7B1F51D91F00ECE32C /* ViewController.swift in Sources */,
+				847F6E921F51F6FB00ECE32C /* AutoComplete.swift in Sources */,
 				847F6E791F51D91F00ECE32C /* AppDelegate.swift in Sources */,
+				847F6E8F1F51F5C700ECE32C /* LocationClient.swift in Sources */,
 				847F6E8D1F51E4BD00ECE32C /* LocationRequest.swift in Sources */,
 				847F6E8B1F51DA8000ECE32C /* Constants.swift in Sources */,
 			);
@@ -393,6 +413,7 @@
 				847F6E891F51D91F00ECE32C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
