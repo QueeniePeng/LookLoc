@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  AutoCompleteViewController.swift
 //  LookLoc
 //
 //  Created by pengQueenie on 2017/8/26.
@@ -8,13 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class AutoCompleteViewController: UIViewController {
     
+    @IBOutlet weak var TFSearch: UITextField!
+    @IBOutlet weak var AutoCompleteTableView: UITableView!
+    
+    fileprivate let reuseIdentifier = "AutoCompleteCell"
     fileprivate var autoCompletes = [AutoComplete]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+    }
+    
+    func getAutoComplete() {
         let locClient = LocationClient()
         Constants.AutocompleteSearchValues.Input = "volare"
         Constants.RestaurantSearchValues.keyword = "volare"
@@ -26,6 +33,7 @@ class ViewController: UIViewController {
             self.autoCompletes = results
             print("results: \(results.count)")
         }
+        AutoCompleteTableView.reloadData()
     }
 }
 
