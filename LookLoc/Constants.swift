@@ -12,20 +12,28 @@ import Foundation
 struct Constants {
     
     // restaurant example
-    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&location=41.8781,-87.6298&radius=50000&type=restaurant&keyword=volare
+    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&location=41.8781,-87.6298&radius=50000&type=restaurant&keyword=volare&language=en
     
     // auto complete example
     // https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&input=volare&offset=3location=41.8781,-87.6298&radius=50000
 
-    
     static let ApiKey: String = "AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0"
     
-    // auto complete
+    // auto complete - keys
     struct AutocompleteSearchKeys {
-        static let Input = "input"
-        static let OffSet = "offset"
-        static let Radius = "radius"
-        static let Location = "location"
+        static let ApiKey: String = "key"
+        static let Input: String = "input"
+        static let OffSet: String = "offset"
+        static let Radius: String = "radius"
+        static let Location: String = "location"
+    }
+    
+    // auto complete - values
+    struct AutocompleteSearchValues {
+        static let Input: String = "" // get from user
+        static let OffSet: String = "3"
+        static let Radius: String = "50000"
+        static let Location: String = "41.8781,-87.6298" // chicago lat,lon
     }
     
     struct AutocompleteResponseKeys {
@@ -36,11 +44,20 @@ struct Constants {
     
     // restaurant
     struct RestaurantSearchKeys {
+        static let ApiKey: String = "key"
         static let Radius: String = "radius"
         static let keyword: String = "keyword"
         static let Location: String = "location"
         static let Language: String = "language"
-        static let BusinessType: String = "type"
+        static let BusinessType: String = "types"
+    }
+    
+    struct RestaurantSearchValues {
+        static let Radius: String = "50000"
+        static let keyword: String = "" // get from user
+        static let Language: String = "en"
+        static let BusinessType: String = "restaurant"
+        static let Location: String = "41.8781,-87.6298" // chicago lat,lon
     }
     
     struct RestaurantResponseKeys {

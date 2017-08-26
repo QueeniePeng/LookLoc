@@ -13,6 +13,7 @@
 		847F6E801F51D91F00ECE32C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847F6E7F1F51D91F00ECE32C /* Assets.xcassets */; };
 		847F6E831F51D91F00ECE32C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847F6E811F51D91F00ECE32C /* LaunchScreen.storyboard */; };
 		847F6E8B1F51DA8000ECE32C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E8A1F51DA8000ECE32C /* Constants.swift */; };
+		847F6E8D1F51E4BD00ECE32C /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E8C1F51E4BD00ECE32C /* LocationRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		847F6E821F51D91F00ECE32C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		847F6E841F51D91F00ECE32C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		847F6E8A1F51DA8000ECE32C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		847F6E8C1F51E4BD00ECE32C /* LocationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				847F6E781F51D91F00ECE32C /* AppDelegate.swift */,
 				847F6E7A1F51D91F00ECE32C /* ViewController.swift */,
 				847F6E8A1F51DA8000ECE32C /* Constants.swift */,
+				847F6E8C1F51E4BD00ECE32C /* LocationRequest.swift */,
 				847F6E7C1F51D91F00ECE32C /* Main.storyboard */,
 				847F6E7F1F51D91F00ECE32C /* Assets.xcassets */,
 				847F6E811F51D91F00ECE32C /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			files = (
 				847F6E7B1F51D91F00ECE32C /* ViewController.swift in Sources */,
 				847F6E791F51D91F00ECE32C /* AppDelegate.swift in Sources */,
+				847F6E8D1F51E4BD00ECE32C /* LocationRequest.swift in Sources */,
 				847F6E8B1F51DA8000ECE32C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
