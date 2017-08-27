@@ -11,12 +11,12 @@ import UIKit
 class LocationDetail {
     let icon: String
     let name: String
-    let rating: Float
+    let rating: String
     let types: [String]
     let address: String
-    let openNow: Bool
+    let openNow: AnyObject
     
-    init(icon: String, name: String, rating: Float, types: [String], address: String, openNow: Bool) {
+    init(icon: String, name: String, rating: String, types: [String], address: String, openNow: AnyObject) {
         self.icon = icon
         self.name = name
         self.rating = rating
