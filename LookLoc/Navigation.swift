@@ -15,8 +15,9 @@ struct Navigation {
     static var FontSize: CGFloat = 25
     static let TextAttributes = [NSForegroundColorAttributeName: FontColor,
                                  NSFontAttributeName: UIFont(name: Font, size: FontSize)!]
-    
-    
+}
+
+extension Navigation {
     static func addNavigation(_ vc: UIViewController) {
         let nav = vc.navigationController?.navigationBar
         vc.navigationItem.title = Navigation.Title

@@ -19,9 +19,9 @@ class LocationClient: NSObject {
             if let JSON = response.result.value as? [String: AnyObject] {
                 print("json: \(JSON)")
                 
-                var autoCompletes = [AutoComplete]()
                 guard let status = JSON[Constants.Status] as? String else { return }
                 if status == "OK" {
+                    var autoCompletes = [AutoComplete]()
                     guard let predictions = JSON[Constants.AutocompleteResponseKeys.Predictions] as? [[String: AnyObject]] else { return }
                     for prediction in predictions {
                         guard let description =  prediction[Constants.AutocompleteResponseKeys.Description] as? String else { return }
@@ -44,5 +44,39 @@ class LocationClient: NSObject {
         }
     }
     
-//    func location
+    func locationDetail(keyword: String, completion: @escaping (_ results: [LocationDetail]?, _ error: NSError?) -> Void) {
+    
+        Alamofire.request(locationRequest.locationURL!).responseJSON { response in
+            if let JSON = response.result.value as? [String: AnyObject] {
+                print("json: \(JSON)")
+                
+                guard let status = JSON[Constants.Status] as? String else { return }
+                if status == "OK" {
+                    var locationDetails = [LocationDetail]()
+                    guard let results = JSON[Constants.LocationResponseKeys.Results] as? [[String: AnyObject]] else { return }
+                    for result in results {
+                        guard let icon = result[Constants.LocationResponseKeys.Icon] as? String else { return }
+                        guard let name = result[Constants.LocationResponseKeys.Name] as? String else { return }
+                        guard let vicinity = result[Constants.LocationResponseKeys.Vincinity] as? String else { return }
+                        guard let rating = result[Constants.LocationResponseKeys.Rating] as? Float else { return }
+                        guard let types = result[Constants.LocationResponseKeys.Types] as? [String] else { return }
+
+                        guard let openHour = result[Constants.LocationResponseKeys.OpenHour] as? [String: AnyObject] else { return }
+                        guard let openNow = openHour[Constants.LocationResponseKeys.OpenNow] as? Bool else { return } // nest in openHour
+                        
+                        guard let photos = result[Constants.LocationResponseKeys.Photos] as? [String: AnyObject] else { return }
+                        guard let html = photos[Constants.LocationResponseKeys.Html] as? String else { return } // nest in photos
+                        
+                        let locationDetail = LocationDetail.init(icon: icon, name: name, rating: rating, types: types, vicinity: vicinity, openNow: openNow)
+                        locationDetails.append(locationDetail)
+                    }
+                    OperationQueue.main.addOperation({
+                        completion((locationDetails), nil)
+                    })
+                } else {
+                    print("Status is not OK")
+                }
+            }
+        }
+    }
 }

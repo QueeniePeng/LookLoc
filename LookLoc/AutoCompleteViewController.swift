@@ -23,7 +23,7 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.TFSearch.placeholder = placeHolder
         self.TFSearch.delegate = self
         self.AutoCompleteTableView.delegate = self
@@ -40,7 +40,19 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
         AutoCompleteTableView.rowHeight = UITableViewAutomaticDimension
     }
     
-
+    func getLocation() {
+        
+        var locationDetails = [LocationDetail]()
+        let locClient = LocationClient()
+        locClient.locationDetail(keyword: Constants.LocationSearchValues.keyword) { (results, error) in
+            if let error = error {
+                print("error: \(error)")
+            }
+            guard let results = results else { return }
+            print("results: \(results.count)")
+            locationDetails = results
+        }
+    }
     
     func getAutoComplete() {
         autoCompletes.removeAll(keepingCapacity: false)
@@ -63,7 +75,7 @@ extension AutoCompleteViewController {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         AutoCompleteTableView!.isHidden = false
-        let substring = (self.TFSearch.text! as NSString).replacingCharacters(in: range, with: string)
+        let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
         Constants.AutocompleteSearchValues.Input = substring.lowercased()
 
@@ -72,6 +84,9 @@ extension AutoCompleteViewController {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // stack over flow - https://stackoverflow.com/questions/29398678/encoding-url-using-swift-code
+        let keyword = (textField.text)?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlUserAllowed)
+        Constants.LocationSearchValues.keyword = keyword!
         TFSearch.resignFirstResponder()
         return true
     }
@@ -108,7 +123,7 @@ extension AutoCompleteViewController: UITableViewDataSource {
         let keywords = autoCompletes[indexPath.row].description
 
         // stack over flow - https://stackoverflow.com/questions/29398678/encoding-url-using-swift-code
-        Constants.LocationSearchValues.keyword = keywords.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        Constants.LocationSearchValues.keyword = keywords.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         print("keyword: \(Constants.LocationSearchValues.keyword)")
         TFSearch.resignFirstResponder()
 //        self.performSegue(withIdentifier: "", sender: self)

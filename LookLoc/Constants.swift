@@ -64,10 +64,11 @@ struct Constants {
     }
     
     struct LocationResponseKeys {
+        static let Results: String = "results"
         static let Icon: String = "icon"
         static let Name: String = "name"
+        static let Types: String = "types"
         static let Rating: String = "rating"
-//        static let Price: String = "price_level"
         static let Vincinity: String = "vicinity"
         
         static let OpenHour: String = "opening_hours" // nest in open now

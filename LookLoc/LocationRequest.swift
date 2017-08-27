@@ -29,13 +29,13 @@ struct LocationRequest {
     // location example
     // https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&location=41.8781,-87.6298&radius=50000&keyword=volare&language=en
     
-    var restaurantURL: Foundation.URL? {
+    var locationURL: Foundation.URL? {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "maps.googleapis.com"
         urlComponents.path = "/maps.googleapis.com/maps/api/place/nearbysearch/json"
-        urlComponents.query = restaurantQueryURL()
+        urlComponents.query = locationQueryURL()
         
         print(urlComponents.url!)
         return urlComponents.url
@@ -61,7 +61,7 @@ extension LocationRequest {
     }
     
     // restaurant query
-    func restaurantQueryURL() -> String {
+    func locationQueryURL() -> String {
         let methodParameters = [
             Constants.LocationSearchKeys.ApiKey: Constants.ApiKey,
             Constants.LocationSearchKeys.BusinessType: Constants.LocationSearchValues.BusinessType,
