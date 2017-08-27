@@ -10,7 +10,12 @@ import UIKit
 
 class LocationDetailViewController: UIViewController {
     
+    @IBOutlet weak var LocationTableView: UITableView!
+    
     fileprivate var locationDetails = [LocationDetail]()
+    
+    // cell
+    fileprivate let reuseIdentifier = "LocationCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
