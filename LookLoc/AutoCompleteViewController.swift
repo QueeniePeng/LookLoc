@@ -23,7 +23,7 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // setup cell hight
+
         self.TFSearch.placeholder = placeHolder
         self.TFSearch.delegate = self
         self.AutoCompleteTableView.delegate = self
@@ -33,22 +33,14 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
     
     override func viewWillAppear(_ animated: Bool) {
         
-        addNavigation()
+        Navigation.addNavigation(self)
         
         // self-sizing table view cell
         AutoCompleteTableView.estimatedRowHeight = 120
         AutoCompleteTableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    func addNavigation() {
-        let nav = self.navigationController?.navigationBar
-        self.navigationItem.title = Navigation.Title
-        nav?.titleTextAttributes = Navigation.TextAttributes
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        
-        // set default is translucent
-        self.navigationController?.navigationBar.isTranslucent = true
-    }
+
     
     func getAutoComplete() {
         autoCompletes.removeAll(keepingCapacity: false)
@@ -111,6 +103,13 @@ extension AutoCompleteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as? AutoCompleteCell
         TFSearch.text = selectedCell?.LBName.text
+        
+        // escaped keyword
+        let keywords = autoCompletes[indexPath.row].description
+
+        // stack over flow - https://stackoverflow.com/questions/29398678/encoding-url-using-swift-code
+        Constants.LocationSearchValues.keyword = keywords.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        print("keyword: \(Constants.LocationSearchValues.keyword)")
         TFSearch.resignFirstResponder()
 //        self.performSegue(withIdentifier: "", sender: self)
     }

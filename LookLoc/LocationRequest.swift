@@ -26,9 +26,8 @@ struct LocationRequest {
     }
     
     
-    
-    // restaurant example
-    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&location=41.8781,-87.6298&radius=50000&type=restaurant&keyword=volare&language=en
+    // location example
+    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&location=41.8781,-87.6298&radius=50000&keyword=volare&language=en
     
     var restaurantURL: Foundation.URL? {
         
@@ -64,12 +63,12 @@ extension LocationRequest {
     // restaurant query
     func restaurantQueryURL() -> String {
         let methodParameters = [
-            Constants.RestaurantSearchKeys.ApiKey: Constants.ApiKey,
-            Constants.RestaurantSearchKeys.BusinessType: Constants.RestaurantSearchValues.BusinessType,
-            Constants.RestaurantSearchKeys.Language: Constants.RestaurantSearchValues.Language,
-            Constants.RestaurantSearchKeys.Location: Constants.RestaurantSearchValues.Location,
-            Constants.RestaurantSearchKeys.Radius: Constants.RestaurantSearchValues.Radius,
-            Constants.RestaurantSearchKeys.keyword: Constants.RestaurantSearchValues.keyword
+            Constants.LocationSearchKeys.ApiKey: Constants.ApiKey,
+            Constants.LocationSearchKeys.BusinessType: Constants.LocationSearchValues.BusinessType,
+            Constants.LocationSearchKeys.Language: Constants.LocationSearchValues.Language,
+            Constants.LocationSearchKeys.Location: Constants.LocationSearchValues.Location,
+            Constants.LocationSearchKeys.Radius: Constants.LocationSearchValues.Radius,
+            Constants.LocationSearchKeys.keyword: Constants.LocationSearchValues.keyword
             ] as [String: Any]
         
         let restaurantQuery = escapedParameters(methodParameters as [String: AnyObject])
