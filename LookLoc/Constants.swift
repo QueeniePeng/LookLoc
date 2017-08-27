@@ -10,12 +10,6 @@ import Foundation
 
 
 struct Constants {
-    
-    // restaurant example
-    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&location=41.8781,-87.6298&radius=50000&type=restaurant&keyword=volare&language=en
-    
-    // auto complete example
-    // https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0&input=volare&offset=3location=41.8781,-87.6298&radius=50000
 
     static let ApiKey: String = "AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0"
     static let Status: String = "status"
@@ -49,17 +43,15 @@ struct Constants {
     struct LocationSearchKeys {
         static let ApiKey: String = "key"
         static let Radius: String = "radius"
-        static let keyword: String = "keyword"
+        static let Query: String = "query"
         static let Location: String = "location"
         static let Language: String = "language"
-        static let BusinessType: String = "types"
     }
     
     struct LocationSearchValues {
-        static var keyword: String = "" // get from user
+        static var Query: String = "" // get from user
         static let Radius: String = "50000"
         static let Language: String = "en"
-        static let BusinessType: String = "restaurant"
         static let Location: String = "41.8781,-87.6298" // chicago lat,lon
     }
     
@@ -69,7 +61,7 @@ struct Constants {
         static let Name: String = "name"
         static let Types: String = "types"
         static let Rating: String = "rating"
-        static let Vincinity: String = "vicinity"
+        static let Formatted_Address: String = "formatted_address"
         
         static let OpenHour: String = "opening_hours" // nest in open now
         static let OpenNow: String = "open_now"

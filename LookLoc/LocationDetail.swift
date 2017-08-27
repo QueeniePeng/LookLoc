@@ -13,15 +13,15 @@ class LocationDetail {
     let name: String
     let rating: Float
     let types: [String]
-    let vicinity: String
+    let address: String
     let openNow: Bool
     
-    init(icon: String, name: String, rating: Float, types: [String], vicinity: String, openNow: Bool) {
+    init(icon: String, name: String, rating: Float, types: [String], address: String, openNow: Bool) {
         self.icon = icon
         self.name = name
         self.rating = rating
         self.types = types
-        self.vicinity = vicinity
+        self.address = address
         self.openNow = openNow
     }
 }

@@ -20,6 +20,7 @@
 		847F6E971F5209AF00ECE32C /* AutoCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E961F5209AF00ECE32C /* AutoCompleteCell.swift */; };
 		847F6E9B1F521F2C00ECE32C /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E9A1F521F2C00ECE32C /* Navigation.swift */; };
 		847F6E9D1F53501C00ECE32C /* LocationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E9C1F53501C00ECE32C /* LocationDetail.swift */; };
+		847F6E9F1F535CD500ECE32C /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F6E9E1F535CD500ECE32C /* LocationDetailViewController.swift */; };
 		A034BFEE6F5758A1E8EA779D /* Pods_LookLoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0511180071FC89CFCB6E10 /* Pods_LookLoc.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		847F6E961F5209AF00ECE32C /* AutoCompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteCell.swift; sourceTree = "<group>"; };
 		847F6E9A1F521F2C00ECE32C /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		847F6E9C1F53501C00ECE32C /* LocationDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetail.swift; sourceTree = "<group>"; };
+		847F6E9E1F535CD500ECE32C /* LocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 		945186EAAB52DF2BBF77F37D /* Pods-LookLoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookLoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-LookLoc/Pods-LookLoc.release.xcconfig"; sourceTree = "<group>"; };
 		A24F52AF8AF6C31EB8FAF5F3 /* Pods-LookLoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookLoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LookLoc/Pods-LookLoc.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				847F6E7A1F51D91F00ECE32C /* AutoCompleteViewController.swift */,
+				847F6E9E1F535CD500ECE32C /* LocationDetailViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				847F6E921F51F6FB00ECE32C /* AutoComplete.swift in Sources */,
 				847F6E791F51D91F00ECE32C /* AppDelegate.swift in Sources */,
 				847F6E9D1F53501C00ECE32C /* LocationDetail.swift in Sources */,
+				847F6E9F1F535CD500ECE32C /* LocationDetailViewController.swift in Sources */,
 				847F6E9B1F521F2C00ECE32C /* Navigation.swift in Sources */,
 				847F6E8F1F51F5C700ECE32C /* LocationClient.swift in Sources */,
 				847F6E8D1F51E4BD00ECE32C /* LocationRequest.swift in Sources */,

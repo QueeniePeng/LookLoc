@@ -95,18 +95,37 @@
                     <connections>
                         <outlet property="AutoCompleteTableView" destination="9Zy-nS-CEf" id="bQe-5q-eVN"/>
                         <outlet property="TFSearch" destination="8lo-1u-8BM" id="SHo-hB-yjW"/>
+                        <segue destination="tv7-xe-eZd" kind="show" identifier="ShowLocationDetail" id="SZw-rI-qtB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="138.98050974512745"/>
         </scene>
+        <!--Location Detail View Controller-->
+        <scene sceneID="tbU-qG-C4y">
+            <objects>
+                <viewController id="tv7-xe-eZd" customClass="LocationDetailViewController" customModule="LookLoc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EEa-ce-tpt"/>
+                        <viewControllerLayoutGuide type="bottom" id="F4O-ks-XYu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8rj-3o-TkT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sMk-iu-s3f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="139"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="XEE-3h-Taw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TyC-z8-xfA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qjm-bl-bY8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qjm-bl-bY8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.67137926820000005" blue="0.60325487089999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

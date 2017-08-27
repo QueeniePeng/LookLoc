@@ -44,7 +44,7 @@ class LocationClient: NSObject {
         }
     }
     
-    func locationDetail(keyword: String, completion: @escaping (_ results: [LocationDetail]?, _ error: NSError?) -> Void) {
+    func locationDetail(query: String, completion: @escaping (_ results: [LocationDetail]?, _ error: NSError?) -> Void) {
     
         Alamofire.request(locationRequest.locationURL!).responseJSON { response in
             if let JSON = response.result.value as? [String: AnyObject] {
@@ -57,17 +57,17 @@ class LocationClient: NSObject {
                     for result in results {
                         guard let icon = result[Constants.LocationResponseKeys.Icon] as? String else { return }
                         guard let name = result[Constants.LocationResponseKeys.Name] as? String else { return }
-                        guard let vicinity = result[Constants.LocationResponseKeys.Vincinity] as? String else { return }
+                        guard let address = result[Constants.LocationResponseKeys.Formatted_Address] as? String else { return }
                         guard let rating = result[Constants.LocationResponseKeys.Rating] as? Float else { return }
                         guard let types = result[Constants.LocationResponseKeys.Types] as? [String] else { return }
 
                         guard let openHour = result[Constants.LocationResponseKeys.OpenHour] as? [String: AnyObject] else { return }
                         guard let openNow = openHour[Constants.LocationResponseKeys.OpenNow] as? Bool else { return } // nest in openHour
                         
-                        guard let photos = result[Constants.LocationResponseKeys.Photos] as? [String: AnyObject] else { return }
-                        guard let html = photos[Constants.LocationResponseKeys.Html] as? String else { return } // nest in photos
+//                        guard let photos = result[Constants.LocationResponseKeys.Photos] as? [String: AnyObject] else { return }
+//                        guard let html = photos[Constants.LocationResponseKeys.Html] as? String else { return } // nest in photos
                         
-                        let locationDetail = LocationDetail.init(icon: icon, name: name, rating: rating, types: types, vicinity: vicinity, openNow: openNow)
+                        let locationDetail = LocationDetail.init(icon: icon, name: name, rating: rating, types: types, address: address, openNow: openNow)
                         locationDetails.append(locationDetail)
                     }
                     OperationQueue.main.addOperation({

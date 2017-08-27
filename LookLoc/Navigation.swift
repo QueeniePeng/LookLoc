@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Navigation
+
 struct Navigation {
     static let Title = "LookLoc."
     static let Font = "GillSans-Bold"

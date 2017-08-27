@@ -20,6 +20,9 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
     
     // text field
     fileprivate let placeHolder: String = "Search"
+    
+    // segue
+    fileprivate let locationDetailSegue: String = "ShowLocationDetail"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,20 +41,6 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
         // self-sizing table view cell
         AutoCompleteTableView.estimatedRowHeight = 120
         AutoCompleteTableView.rowHeight = UITableViewAutomaticDimension
-    }
-    
-    func getLocation() {
-        
-        var locationDetails = [LocationDetail]()
-        let locClient = LocationClient()
-        locClient.locationDetail(keyword: Constants.LocationSearchValues.keyword) { (results, error) in
-            if let error = error {
-                print("error: \(error)")
-            }
-            guard let results = results else { return }
-            print("results: \(results.count)")
-            locationDetails = results
-        }
     }
     
     func getAutoComplete() {
@@ -85,9 +74,11 @@ extension AutoCompleteViewController {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // stack over flow - https://stackoverflow.com/questions/29398678/encoding-url-using-swift-code
-        let keyword = (textField.text)?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlUserAllowed)
-        Constants.LocationSearchValues.keyword = keyword!
+        let query = (textField.text)?.replacingOccurrences(of: ",", with: " ")
+        Constants.LocationSearchValues.Query = (query?.lowercased())!
         TFSearch.resignFirstResponder()
+        self.performSegue(withIdentifier: locationDetailSegue, sender: self)
+        
         return true
     }
 }
@@ -120,13 +111,15 @@ extension AutoCompleteViewController: UITableViewDataSource {
         TFSearch.text = selectedCell?.LBName.text
         
         // escaped keyword
-        let keywords = autoCompletes[indexPath.row].description
-
-        // stack over flow - https://stackoverflow.com/questions/29398678/encoding-url-using-swift-code
-        Constants.LocationSearchValues.keyword = keywords.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-        print("keyword: \(Constants.LocationSearchValues.keyword)")
+        var querys = autoCompletes[indexPath.row].description
+        querys = querys.replacingOccurrences(of: ",", with: "")
+        Constants.LocationSearchValues.Query = (querys.lowercased())
+        
+        print("keyword: \(Constants.LocationSearchValues.Query)")
         TFSearch.resignFirstResponder()
-//        self.performSegue(withIdentifier: "", sender: self)
+        
+        // segue
+        self.performSegue(withIdentifier: locationDetailSegue, sender: self)
     }
 }
 
