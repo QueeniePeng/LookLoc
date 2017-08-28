@@ -18,8 +18,6 @@ class LocationDetailCell: UITableViewCell {
     
     // types
     @IBOutlet weak var LBTypeOne: UILabel!
-    @IBOutlet weak var LBTypeTwo: UILabel!
-    @IBOutlet weak var LBTypeThree: UILabel!
     
     
     

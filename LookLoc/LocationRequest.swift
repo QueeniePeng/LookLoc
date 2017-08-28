@@ -74,7 +74,7 @@ extension LocationRequest {
         return restaurantQuery
     }
     
-    // escape key-value pairs
+    // setup key-value pairs
     func escapedParameters(_ parameters: [String: AnyObject]) -> String {
         if parameters.isEmpty {
             return ""
@@ -82,9 +82,6 @@ extension LocationRequest {
             var keyValuePairs = [String]()
             for (key, value) in parameters {
                 let stringValue = "\(value)"
-                
-                // google escaped automatically
-//                let escapedValue = stringValue.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
                 keyValuePairs.append(key + "=" + "\(stringValue)")
             }
             return "\(keyValuePairs.joined(separator: "&"))"

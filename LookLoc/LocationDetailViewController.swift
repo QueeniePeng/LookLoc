@@ -19,14 +19,17 @@ class LocationDetailViewController: UIViewController, UITableViewDataSource, UIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         LocationTableView.dataSource = self
         LocationTableView.delegate = self
         getLocation()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        // navigation
+        Navigation.addNavigation(self)
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .white
         
         // self-sizing table view cell
         LocationTableView.estimatedRowHeight = 160
@@ -43,7 +46,6 @@ class LocationDetailViewController: UIViewController, UITableViewDataSource, UIT
             guard let results = results else { return }
             print("results: \(results.count)")
             self.locationDetails = results
-            
             self.LocationTableView.reloadData()
         }
     }
@@ -59,14 +61,14 @@ extension LocationDetailViewController {
         return locationDetails.count
     }
     
-    // config business cell
+    // config location detail cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! LocationDetailCell
         let locationDetail = locationDetails[indexPath.row]
         
         var openNow: String
-        if (locationDetail.openNow) as? Bool == true {
+        if (locationDetail.openNow) == true {
             openNow = "OPEN"
         } else {
             openNow = "CLOSED"
@@ -76,18 +78,14 @@ extension LocationDetailViewController {
         let data = try? Data(contentsOf: url!)
         let icon: UIImage = UIImage(data: data!)!
         
+        
+        // TODO: clean up
         let types = locationDetail.types
         if types.count > 0 {
-            for (index, type) in types.enumerated() {
-                
-                if index == 0 {
-                    cell.LBTypeOne.text = type
-                } else if index == 1 {
-                    cell.LBTypeTwo.text = type
-                } else if index == 2 {
-                    cell.LBTypeThree.text = type
-                }
-            }
+            cell.LBTypeOne.isHidden = false
+            cell.LBTypeOne.text = types[0]
+        } else {
+            cell.LBTypeOne.isHidden = true
         }
         
         cell.IVIcon.image = icon

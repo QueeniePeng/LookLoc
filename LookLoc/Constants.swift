@@ -11,7 +11,7 @@ import Foundation
 
 struct Constants {
 
-    static let ApiKey: String = "AIzaSyBMPCMhbVgfX6AKWlXKkjorH0Nw77J4eA0"
+    static let ApiKey: String = "AIzaSyDu_PmD0ldhNcSFO-cUN2I7l84eqMoxXTM"
     static let Status: String = "status"
     
     // auto complete - keys
