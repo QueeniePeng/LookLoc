@@ -23,9 +23,14 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
     
     // segue
     fileprivate let locationDetailSegue: String = "ShowLocationDetail"
+    
+    // reachability
+    fileprivate let reachability = Reachability()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addReachability()
         
         self.TFSearch.placeholder = placeHolder
         self.TFSearch.delegate = self
@@ -75,7 +80,7 @@ extension AutoCompleteViewController {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // stack over flow - https://stackoverflow.com/questions/29398678/encoding-url-using-swift-code
+
         let query = (textField.text)?.replacingOccurrences(of: ",", with: " ")
         Constants.LocationSearchValues.Query = (query?.lowercased())!
         TFSearch.resignFirstResponder()
@@ -112,16 +117,36 @@ extension AutoCompleteViewController: UITableViewDataSource {
         let selectedCell = tableView.cellForRow(at: indexPath) as? AutoCompleteCell
         TFSearch.text = selectedCell?.LBName.text
         
-        // escaped keyword
+        // escaped Query
         var querys = autoCompletes[indexPath.row].description
         querys = querys.replacingOccurrences(of: ",", with: "")
         Constants.LocationSearchValues.Query = (querys.lowercased())
         
-        print("keyword: \(Constants.LocationSearchValues.Query)")
+        print("Query: \(Constants.LocationSearchValues.Query)")
         TFSearch.resignFirstResponder()
         
         // segue
         self.performSegue(withIdentifier: locationDetailSegue, sender: self)
+    }
+}
+
+// MARK: - Reachability
+
+extension AutoCompleteViewController {
+    
+    func addReachability() {
+        reachability.whenReachable = { _ in
+        }
+        reachability.whenUnreachable = { _ in
+            DispatchQueue.main.async {
+                Alert.showConnectionAlert(self)
+            }
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
 }
 
