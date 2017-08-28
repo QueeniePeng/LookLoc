@@ -104,8 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				847F6E781F51D91F00ECE32C /* AppDelegate.swift */,
-				847F6EA21F54922C00ECE32C /* Alert.swift */,
-				847F6EA41F54929300ECE32C /* Reachability.swift */,
+				847F6EA71F5496E000ECE32C /* Third Party */,
+				847F6EA61F5496C800ECE32C /* Helpers */,
 				847F6E991F52122000ECE32C /* Models */,
 				847F6E901F51F5CD00ECE32C /* Networking */,
 				847F6E981F5209B700ECE32C /* Views */,
@@ -154,6 +154,22 @@
 				847F6E9C1F53501C00ECE32C /* LocationDetail.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		847F6EA61F5496C800ECE32C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				847F6EA21F54922C00ECE32C /* Alert.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		847F6EA71F5496E000ECE32C /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				847F6EA41F54929300ECE32C /* Reachability.swift */,
+			);
+			name = "Third Party";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

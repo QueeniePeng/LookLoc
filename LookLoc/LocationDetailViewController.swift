@@ -17,13 +17,11 @@ class LocationDetailViewController: UIViewController, UITableViewDataSource, UIT
     // cell
     fileprivate let reuseIdentifier = "LocationCell"
     
-    // reachability
-    fileprivate let reachability = Reachability()!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addReachability()
+        // reachability
+        Alert.addReachability(self)
         
         LocationTableView.dataSource = self
         LocationTableView.delegate = self
@@ -101,25 +99,5 @@ extension LocationDetailViewController {
         cell.LBOpenNow.text = openNow
         
         return cell
-    }
-}
-
-// MARK: - Reachability
-
-extension LocationDetailViewController {
-
-    func addReachability() {
-        reachability.whenReachable = { _ in
-        }
-        reachability.whenUnreachable = { _ in
-            DispatchQueue.main.async {
-                Alert.showConnectionAlert(self)
-            }
-        }
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
     }
 }

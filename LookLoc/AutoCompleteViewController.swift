@@ -23,14 +23,12 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
     
     // segue
     fileprivate let locationDetailSegue: String = "ShowLocationDetail"
-    
-    // reachability
-    fileprivate let reachability = Reachability()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addReachability()
+        // reachability
+        Alert.addReachability(self)
         
         self.TFSearch.placeholder = placeHolder
         self.TFSearch.delegate = self
@@ -130,23 +128,4 @@ extension AutoCompleteViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - Reachability
-
-extension AutoCompleteViewController {
-    
-    func addReachability() {
-        reachability.whenReachable = { _ in
-        }
-        reachability.whenUnreachable = { _ in
-            DispatchQueue.main.async {
-                Alert.showConnectionAlert(self)
-            }
-        }
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
-    }
-}
 
