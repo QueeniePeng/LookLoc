@@ -14,7 +14,13 @@ struct Constants {
     static let ApiKey: String = "AIzaSyDu_PmD0ldhNcSFO-cUN2I7l84eqMoxXTM"
     static let Status: String = "status"
     
-    // auto complete - keys
+    // TODO: status 
+    enum StatusValue: String {
+        case OK = "OK", ZERO = "ZERO_RESULTS", OVER = "OVER_QUERY_LIMIT"
+    }
+    
+    static var StatusNow: String = ""
+    // Auto complete - keys
     struct AutocompleteSearchKeys {
         static let ApiKey: String = "key"
         static let Input: String = "input"
@@ -23,7 +29,7 @@ struct Constants {
         static let Location: String = "location"
     }
     
-    // auto complete - values
+    // Auto complete - values
     struct AutocompleteSearchValues {
         static var Input: String = "" // get from user
         static let OffSet: String = "3"
@@ -31,6 +37,7 @@ struct Constants {
         static let Location: String = "41.8781,-87.6298" // chicago lat,lon
     }
     
+    // Auto complete - response keys
     struct AutocompleteResponseKeys {
         static let Predictions: String = "predictions"
         static let Description: String = "description"
@@ -39,7 +46,7 @@ struct Constants {
         static let StructuredFormat: String = "structured_formatting"
     }
     
-    // Location
+    // Location - keys
     struct LocationSearchKeys {
         static let ApiKey: String = "key"
         static let Radius: String = "radius"
@@ -48,6 +55,7 @@ struct Constants {
         static let Language: String = "language"
     }
     
+    // Location - values
     struct LocationSearchValues {
         static var Query: String = "" // get from user
         static let Radius: String = "50000"
@@ -55,6 +63,7 @@ struct Constants {
         static let Location: String = "41.8781,-87.6298" // chicago lat,lon
     }
     
+    // Location - response keys
     struct LocationResponseKeys {
         static let Results: String = "results"
         static let Icon: String = "icon"

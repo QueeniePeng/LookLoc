@@ -20,6 +20,17 @@ class Alert {
         }
     }
     
+    // show zero results alert & return to root vc
+    static func showZeroResultAlert(_ vc: UIViewController) {
+        let alertController = UIAlertController(title: "Well I tried, but I can't find anything", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        vc.present(alertController, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                alertController.dismiss(animated: true, completion: nil)
+                vc.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+    }
+    
     static func addReachability(_ vc: UIViewController) {
         let reachability = Reachability()!
         reachability.whenReachable = { _ in

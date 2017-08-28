@@ -20,7 +20,7 @@ class LocationClient: NSObject {
                 print("json: \(JSON)")
                 
                 guard let status = JSON[Constants.Status] as? String else { return }
-                if status == "OK" {
+                if status == Constants.StatusValue.OK.rawValue {
                     var autoCompletes = [AutoComplete]()
                     guard let predictions = JSON[Constants.AutocompleteResponseKeys.Predictions] as? [[String: AnyObject]] else { return }
                     for prediction in predictions {
@@ -50,9 +50,10 @@ class LocationClient: NSObject {
             if let JSON = response.result.value as? [String: AnyObject] {
                 print("json: \(JSON)")
                 
+                var locationDetails = [LocationDetail]()
                 guard let status = JSON[Constants.Status] as? String else { return }
-                if status == "OK" {
-                    var locationDetails = [LocationDetail]()
+                Constants.StatusNow = status
+                if status == Constants.StatusValue.OK.rawValue {
                     guard let results = JSON[Constants.LocationResponseKeys.Results] as? [[String: AnyObject]] else { return }
                     for result in results {
                     
@@ -83,8 +84,12 @@ class LocationClient: NSObject {
                     OperationQueue.main.addOperation({
                         completion((locationDetails), nil)
                     })
+                
                 } else {
                     print("Status is not OK: \n **********\n\(status)\n***********")
+                    OperationQueue.main.addOperation({
+                        completion((locationDetails), nil)
+                    })
                 }
             }
         }

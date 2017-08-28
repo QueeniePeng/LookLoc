@@ -20,7 +20,6 @@ class LocationDetailCell: UITableViewCell {
     @IBOutlet weak var LBTypeOne: UILabel!
     
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -44,13 +44,21 @@ class LocationDetailViewController: UIViewController, UITableViewDataSource, UIT
         locationDetails.removeAll(keepingCapacity: false)
         let locClient = LocationClient()
         locClient.locationDetail(query: Constants.LocationSearchValues.Query) { (results, error) in
+            
             if let error = error {
                 print("error: \(error)")
             }
-            guard let results = results else { return }
-            print("results: \(results.count)")
-            self.locationDetails = results
-            self.LocationTableView.reloadData()
+            if let results = results {
+                print("results: \(results.count)")
+                if results.count > 0 {
+                    self.locationDetails = results
+                    self.LocationTableView.reloadData()
+                
+                // handle zero results return
+                } else {
+                    Alert.showZeroResultAlert(self)
+                }
+            }
         }
     }
 }
