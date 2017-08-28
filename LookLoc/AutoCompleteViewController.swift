@@ -70,10 +70,14 @@ extension AutoCompleteViewController {
         AutoCompleteTableView!.isHidden = false
         let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
-        // store user input
-        Constants.AutocompleteSearchValues.Input = substring.lowercased()
-
-        getAutoComplete()
+        // check if substring length lower than require offset: 3
+        if substring.characters.count < Int(Constants.AutocompleteSearchValues.OffSet)! {
+            
+        } else {
+            Constants.AutocompleteSearchValues.Input = substring.lowercased()
+            getAutoComplete()
+        }
+        
         return true
     }
     

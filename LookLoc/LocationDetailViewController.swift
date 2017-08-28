@@ -108,4 +108,50 @@ extension LocationDetailViewController {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell = tableView.cellForRow(at: indexPath) as! LocationDetailCell
+        let address = selectedCell.LBAddress.text
+        let name = selectedCell.LBName.text
+        if address == "" || (address?.isEmpty)! {
+        } else {
+            openMapApp(name: name!, address: address!)
+        }
+    }
 }
+
+
+// MARK: - Map
+
+extension LocationDetailViewController {
+    
+    // direction
+    func openMapApp(name: String, address: String) {
+        
+        let mapActionSheet = UIAlertController(title: "Direction to \(name)?", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        // apple map
+        let appleMapAction = UIAlertAction(title: "Apple Map", style: UIAlertActionStyle.default) { (action) in
+            
+            // open apple map
+            let convertedAddress = address.components(separatedBy: .whitespaces).joined(separator: "%20")
+            let appleMapString = "http://maps.apple.com/?address=" + convertedAddress
+            guard let appleMapURL = URL(string: appleMapString) else { return }
+            
+            if UIApplication.shared.canOpenURL(appleMapURL) {
+                UIApplication.shared.open(appleMapURL, options: [:], completionHandler: nil)
+            }
+        }
+        
+        // cancel button
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (action) in
+            mapActionSheet.dismiss(animated: true, completion: nil)
+        }
+        
+        // add actions to action sheet
+        mapActionSheet.addAction(appleMapAction)
+        mapActionSheet.addAction(cancelAction)
+        self.present(mapActionSheet, animated: true, completion: nil)
+    }
+}
+

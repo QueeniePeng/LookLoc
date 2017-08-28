@@ -52,7 +52,6 @@ class LocationClient: NSObject {
                 
                 var locationDetails = [LocationDetail]()
                 guard let status = JSON[Constants.Status] as? String else { return }
-                Constants.StatusNow = status
                 if status == Constants.StatusValue.OK.rawValue {
                     guard let results = JSON[Constants.LocationResponseKeys.Results] as? [[String: AnyObject]] else { return }
                     for result in results {
