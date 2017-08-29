@@ -3,7 +3,9 @@
 
 This is an iOS autocomplete demo app for LookFwd.
 
-### Note: autocomplete is triggered >= 3 characters due to api request limitations.
+### Note: 
+### Autocomplete is triggered >= 3 characters due to api request limitations.
+### Run the LookLoc.xcworkspace.
 
 ## Features
 * Autocomplete
