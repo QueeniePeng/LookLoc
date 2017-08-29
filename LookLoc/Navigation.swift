@@ -8,11 +8,25 @@
 
 import UIKit
 
+// MARK: - Navigation
+
 struct Navigation {
-    static let Title = "LookLoc."
+    static let Title = "Look*Loc"
     static let Font = "GillSans-Bold"
     static let FontColor = UIColor.white
     static var FontSize: CGFloat = 25
     static let TextAttributes = [NSForegroundColorAttributeName: FontColor,
                                  NSFontAttributeName: UIFont(name: Font, size: FontSize)!]
+}
+
+extension Navigation {
+    static func addNavigation(_ vc: UIViewController) {
+        let nav = vc.navigationController?.navigationBar
+        vc.navigationItem.title = Navigation.Title
+        nav?.titleTextAttributes = Navigation.TextAttributes
+        vc.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        // set default is translucent
+        vc.navigationController?.navigationBar.isTranslucent = true
+    }
 }
