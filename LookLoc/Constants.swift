@@ -11,14 +11,13 @@ import Foundation
 
 struct Constants {
 
-    static let ApiKey: String = "AIzaSyDu_PmD0ldhNcSFO-cUN2I7l84eqMoxXTM"
+    static let ApiKey: String = "AIzaSyDCXiDCNA3avkE4fC2qhuLawk3VQhLy4hA"
     static let Status: String = "status"
     
     // TODO: status 
     enum StatusValue: String {
         case OK = "OK", ZERO = "ZERO_RESULTS", OVER = "OVER_QUERY_LIMIT"
     }
-    
     static var StatusNow: String = ""
     // Auto complete - keys
     struct AutocompleteSearchKeys {

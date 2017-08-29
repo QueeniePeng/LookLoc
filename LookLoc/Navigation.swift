@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Navigation
 
 struct Navigation {
-    static let Title = "LookLoc."
+    static let Title = "Look*Loc"
     static let Font = "GillSans-Bold"
     static let FontColor = UIColor.white
     static var FontSize: CGFloat = 25

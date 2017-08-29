@@ -68,6 +68,8 @@ class LocationClient: NSObject {
                            let ratingFloat = result[Constants.LocationResponseKeys.Rating] as? Float {
                             openNow = open_Now
                             rating = ratingFloat
+                            
+                        // default
                         } else {
                             openNow = false
                             rating = 0.0
@@ -76,7 +78,7 @@ class LocationClient: NSObject {
                         let locationDetail = LocationDetail.init(icon: icon, name: name, rating: rating!, types: types, address: address, openNow: openNow!)
                         locationDetails.append(locationDetail)
                         
-                        // TODO: 
+                        // TODO: show html attribute
 //                        guard let photos = result[Constants.LocationResponseKeys.Photos] as? [String: AnyObject] else { return }
 //                        guard let html = photos[Constants.LocationResponseKeys.Html] as? String else { return } // nest in photos
                     }

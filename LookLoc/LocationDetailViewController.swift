@@ -8,24 +8,39 @@
 
 import UIKit
 
-class LocationDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LocationDetailViewController: UIViewController, UITableViewDelegate {
     
+    // UI - tableView
     @IBOutlet weak var LocationTableView: UITableView!
     
     fileprivate var locationDetails = [LocationDetail]()
     
     // cell
     fileprivate let reuseIdentifier = "LocationCell"
+    fileprivate enum OpenNow: String {
+        case OPEN = "OPEN", CLOSED = "CLOSED"
+    }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // reachability
-        Alert.addReachability(self)
         
         LocationTableView.dataSource = self
         LocationTableView.delegate = self
-        getLocation()
+        
+        // reachability
+        let reachability = Reachability()!
+        reachability.whenReachable = { _ in
+            self.getLocation()
+        }
+        reachability.whenUnreachable = { _ in
+            DispatchQueue.main.async {
+                Alert.showConnectionAlert(self)
+            }
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        } 
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,12 +51,12 @@ class LocationDetailViewController: UIViewController, UITableViewDataSource, UIT
         self.navigationController?.navigationBar.tintColor = .white
         
         // self-sizing table view cell
-        LocationTableView.estimatedRowHeight = 160
+        LocationTableView.estimatedRowHeight = 120
         LocationTableView.rowHeight = UITableViewAutomaticDimension
     }
     
     func getLocation() {
-        locationDetails.removeAll(keepingCapacity: false)
+        locationDetails.removeAll()
         let locClient = LocationClient()
         locClient.locationDetail(query: Constants.LocationSearchValues.Query) { (results, error) in
             
@@ -63,7 +78,9 @@ class LocationDetailViewController: UIViewController, UITableViewDataSource, UIT
     }
 }
 
-extension LocationDetailViewController {
+// MARK: - UITableViewDataSource
+
+extension LocationDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -81,17 +98,17 @@ extension LocationDetailViewController {
         
         var openNow: String
         if (locationDetail.openNow) == true {
-            openNow = "OPEN"
+            openNow = OpenNow.OPEN.rawValue
         } else {
-            openNow = "CLOSED"
+            openNow = OpenNow.CLOSED.rawValue
         }
         
+        // parse icon image
         let url = URL(string:locationDetail.icon)
         let data = try? Data(contentsOf: url!)
         let icon: UIImage = UIImage(data: data!)!
         
-        
-        // TODO: clean up
+        // TODO: display more types
         let types = locationDetail.types
         if types.count > 0 {
             cell.LBTypeOne.isHidden = false
@@ -109,6 +126,7 @@ extension LocationDetailViewController {
         return cell
     }
     
+    // select location detail cell to call map
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as! LocationDetailCell
         let address = selectedCell.LBAddress.text
@@ -125,15 +143,13 @@ extension LocationDetailViewController {
 
 extension LocationDetailViewController {
     
-    // direction
     func openMapApp(name: String, address: String) {
         
         let mapActionSheet = UIAlertController(title: "Direction to \(name)?", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        // apple map
+        // apple map button
         let appleMapAction = UIAlertAction(title: "Apple Map", style: UIAlertActionStyle.default) { (action) in
             
-            // open apple map
             let convertedAddress = address.components(separatedBy: .whitespaces).joined(separator: "%20")
             let appleMapString = "http://maps.apple.com/?address=" + convertedAddress
             guard let appleMapURL = URL(string: appleMapString) else { return }
@@ -142,16 +158,24 @@ extension LocationDetailViewController {
                 UIApplication.shared.open(appleMapURL, options: [:], completionHandler: nil)
             }
         }
-        
         // cancel button
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (action) in
             mapActionSheet.dismiss(animated: true, completion: nil)
         }
         
-        // add actions to action sheet
         mapActionSheet.addAction(appleMapAction)
         mapActionSheet.addAction(cancelAction)
         self.present(mapActionSheet, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Memory
+
+extension LocationDetailViewController {
+    
+    override func didReceiveMemoryWarning() {
+        Memory.clearMemory()
+        super.didReceiveMemoryWarning()
     }
 }
 

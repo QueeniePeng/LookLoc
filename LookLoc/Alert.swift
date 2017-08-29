@@ -8,7 +8,9 @@
 
 import UIKit
 
-class Alert {
+// MARK: - Alert
+
+struct Alert {
 
     // show connection Alert if not connected to wifi or cellar
     static func showConnectionAlert(_ vc: UIViewController) {
@@ -20,30 +22,14 @@ class Alert {
         }
     }
     
-    // show zero results alert & return to root vc
+    // show zero results alert & return to last vc
     static func showZeroResultAlert(_ vc: UIViewController) {
-        let alertController = UIAlertController(title: "Well I tried, but I can't find anything", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: "Well I tried, but nothing matched the search", message: nil, preferredStyle: UIAlertControllerStyle.alert)
         vc.present(alertController, animated: true) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 alertController.dismiss(animated: true, completion: nil)
-                vc.navigationController?.popToRootViewController(animated: true)
+                vc.navigationController?.popViewController(animated: true)
             }
-        }
-    }
-    
-    static func addReachability(_ vc: UIViewController) {
-        let reachability = Reachability()!
-        reachability.whenReachable = { _ in
-        }
-        reachability.whenUnreachable = { _ in
-            DispatchQueue.main.async {
-                Alert.showConnectionAlert(vc)
-            }
-        }
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
         }
     }
 }

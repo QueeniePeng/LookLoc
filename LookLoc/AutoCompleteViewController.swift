@@ -8,9 +8,9 @@
 
 import UIKit
 
-class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate {
+class AutoCompleteViewController: UIViewController, UITableViewDelegate {
     
-    // UI
+    // UI - textField, tableView
     @IBOutlet weak var TFSearch: UITextField!
     @IBOutlet weak var AutoCompleteTableView: UITableView!
     
@@ -23,12 +23,25 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
     
     // segue
     fileprivate let locationDetailSegue: String = "ShowLocationDetail"
+    
+    let reachability = Reachability()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // reachability
-        Alert.addReachability(self)
+        reachability.whenReachable = { _ in
+        }
+        reachability.whenUnreachable = { _ in
+            DispatchQueue.main.async {
+                Alert.showConnectionAlert(self)
+            }
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
         
         self.TFSearch.placeholder = placeHolder
         self.TFSearch.delegate = self
@@ -64,31 +77,46 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate, UITextF
 
 // MARK: - Text Field
 
-extension AutoCompleteViewController {
+extension AutoCompleteViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        AutoCompleteTableView!.isHidden = false
-        let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        
-        // check if substring length lower than require offset: 3
-        if substring.characters.count < Int(Constants.AutocompleteSearchValues.OffSet)! {
+        // stack over flow: https://stackoverflow.com/questions/24015848/using-stringbyreplacingcharactersinrange-in-swift
+        if (textField.text?.characters.count)! > 0 {
+            let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             
-        } else {
-            Constants.AutocompleteSearchValues.Input = substring.lowercased()
-            getAutoComplete()
+            // check if substring length lower than require offset: 3
+            if substring.characters.count < Int(Constants.AutocompleteSearchValues.OffSet)! {
+            } else {
+                self.AutoCompleteTableView!.isHidden = false
+                Constants.AutocompleteSearchValues.Input = substring.lowercased()
+                self.getAutoComplete()
+            }
         }
-        
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         let query = (textField.text)?.replacingOccurrences(of: ",", with: " ")
-        Constants.LocationSearchValues.Query = (query?.lowercased())!
+        Constants.LocationSearchValues.Query = (query?.lowercased())! // store user input
         TFSearch.resignFirstResponder()
         self.performSegue(withIdentifier: locationDetailSegue, sender: self)
         
         return true
+    }
+    
+    // stack over flow: https://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-uitextfield
+    // dismiss keyboard when touch outside of textField
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let subviews = self.view.subviews
+        for (_, objects) in subviews.enumerated() {
+            if objects.isKind(of: UITextField.self) {
+                let textField = objects
+                if objects.isFirstResponder {
+                    textField.resignFirstResponder()
+                }
+            }
+        }
     }
 }
 
@@ -105,7 +133,7 @@ extension AutoCompleteViewController: UITableViewDataSource {
         return autoCompletes.count
     }
     
-    // config business cell
+    // config auto complete cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! AutoCompleteCell
@@ -115,14 +143,15 @@ extension AutoCompleteViewController: UITableViewDataSource {
         return cell
     }
     
+    // select auto complete cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as? AutoCompleteCell
         TFSearch.text = selectedCell?.LBName.text
         
-        // escaped Query
+        // handle query
         var querys = autoCompletes[indexPath.row].description
         querys = querys.replacingOccurrences(of: ",", with: "")
-        Constants.LocationSearchValues.Query = (querys.lowercased())
+        Constants.LocationSearchValues.Query = (querys.lowercased()) // store user input
         
         print("Query: \(Constants.LocationSearchValues.Query)")
         TFSearch.resignFirstResponder()
@@ -132,4 +161,12 @@ extension AutoCompleteViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - Memory
 
+extension AutoCompleteViewController {
+
+    override func didReceiveMemoryWarning() {
+        Memory.clearMemory()
+        super.didReceiveMemoryWarning()
+    }
+}

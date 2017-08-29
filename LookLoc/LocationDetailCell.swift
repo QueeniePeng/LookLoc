@@ -15,9 +15,10 @@ class LocationDetailCell: UITableViewCell {
     @IBOutlet weak var LBAddress: UILabel!
     @IBOutlet weak var LBRating: UILabel!
     @IBOutlet weak var LBOpenNow: UILabel!
-    
-    // types
     @IBOutlet weak var LBTypeOne: UILabel!
+    
+    @IBOutlet weak var RatingView: UIView! // TODO: change color based on the rating
+    @IBOutlet weak var TypeView: UIView!
     
     
     override func awakeFromNib() {
@@ -26,9 +27,17 @@ class LocationDetailCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: true)
 
-        // Configure the view for the selected state
+        let blueColor = RatingView.backgroundColor
+
+        if selected == true {
+            RatingView.backgroundColor = UIColor.darkGray
+            TypeView.backgroundColor = UIColor.darkGray
+
+        } else {
+            RatingView.backgroundColor = blueColor
+            TypeView.backgroundColor = blueColor
+        }
     }
-
 }

@@ -42,7 +42,7 @@ struct LocationRequest {
     }
 }
 
-// query urls
+// MARK: - query urls
 
 extension LocationRequest {
     
