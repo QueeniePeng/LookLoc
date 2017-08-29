@@ -7,16 +7,21 @@ This is an iOS autocomplete demo app for LookFwd.
 
 ## Features
 * Autocomplete
+
 ![alt text](./readme_assets/0.png)
 
 * Detail Table View
+
 ![alt text](./readme_assets/1.png)
 
 * Map
+
 ![alt text](./readme_assets/3.png)
 
 * No Response
+
 ![alt text](./readme_assets/Zero_Result.png)
 
 * No connection
+
 ![alt text](./readme_assets/2.png)
