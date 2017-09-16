@@ -15,8 +15,8 @@ struct Navigation {
     static let Font = "GillSans-Bold"
     static let FontColor = UIColor.white
     static var FontSize: CGFloat = 25
-    static let TextAttributes = [NSForegroundColorAttributeName: FontColor,
-                                 NSFontAttributeName: UIFont(name: Font, size: FontSize)!]
+    static let TextAttributes = [NSAttributedStringKey.foregroundColor: FontColor,
+                                 NSAttributedStringKey.font: UIFont(name: Font, size: FontSize)!]
 }
 
 extension Navigation {

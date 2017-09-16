@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoCompleteViewController: UIViewController, UITableViewDelegate {
+class AutoCompleteViewController: UIViewController {
     
     // UI - textField, tableView
     @IBOutlet weak var TFSearch: UITextField!
@@ -42,11 +42,13 @@ class AutoCompleteViewController: UIViewController, UITableViewDelegate {
         } catch {
             print("Unable to start notifier")
         }
-        
-        self.TFSearch.placeholder = placeHolder
-        self.TFSearch.delegate = self
-        self.AutoCompleteTableView.delegate = self
-        self.AutoCompleteTableView.dataSource = self
+    }
+    
+    func setUpView() {
+        TFSearch.placeholder = placeHolder
+        TFSearch.delegate = self
+        AutoCompleteTableView.delegate = self
+        AutoCompleteTableView.dataSource = self
         AutoCompleteTableView!.isHidden = true
     }
     
@@ -142,7 +144,11 @@ extension AutoCompleteViewController: UITableViewDataSource {
         cell.LBVincinity.text = autoComplete.vincinity
         return cell
     }
-    
+}
+
+// MARK: - UITableViewDelegate
+
+extension AutoCompleteViewController: UITableViewDelegate {
     // select auto complete cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as? AutoCompleteCell
